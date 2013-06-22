@@ -4,10 +4,9 @@ import de.akquinet.jbosscc.needle.injection.InjectionProvider;
 import de.akquinet.jbosscc.needle.injection.InjectionTargetInformation;
 
 /**
- * InjectionProvider that provides a singleton instance of type T whenever injection is required
+ * InjectionProvider that provides a singleton instance of type T whenever injection is required.
  * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
- * @param <T>
- *        target type
+ * @param <T> target type
  */
 public class DefaultInstanceInjectionProvider<T> implements InjectionProvider<T> {
 
@@ -35,25 +34,16 @@ public class DefaultInstanceInjectionProvider<T> implements InjectionProvider<T>
         this.instance = instance;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean verify(final InjectionTargetInformation injectionTargetInformation) {
         return injectionTargetInformation.getType().isAssignableFrom(instance.getClass());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T getInjectedObject(final Class<?> injectionPointType) {
         return instance;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Object getKey(final InjectionTargetInformation injectionTargetInformation) {
         return injectionTargetInformation.getType();

@@ -1,16 +1,14 @@
 package de.holisticon.toolbox.needle.provider;
 
-
 import javax.inject.Named;
 
 import de.akquinet.jbosscc.needle.injection.InjectionProvider;
 import de.akquinet.jbosscc.needle.injection.InjectionTargetInformation;
 
 /**
- * Needle Injection Provider for Instance with {@link Named} Annotation
+ * Needle Injection Provider for Instance with {@link Named} Annotation. Registers Provider for Type <T> and @Named Annotation value.
  * @author Jan Galinski, Holisticon AG
- * @param <T>
- *        target type.
+ * @param <T> target type.
  */
 public class NamedInjectionProvider<T> implements InjectionProvider<T> {
 
@@ -31,7 +29,7 @@ public class NamedInjectionProvider<T> implements InjectionProvider<T> {
      *        value to encapsulate.
      * @return provider encapsulating the value.
      */
-    public static <T> NamedInjectionProvider<T> forNamedValue(final String name, final T value) {
+    public static <T> NamedInjectionProvider<T> providerForNamedValue(final String name, final T value) {
         return new NamedInjectionProvider<T>(name, value);
     }
 
@@ -47,25 +45,16 @@ public class NamedInjectionProvider<T> implements InjectionProvider<T> {
         this.value = value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public T getInjectedObject(final Class<?> type) {
         return value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Object getKey(final InjectionTargetInformation injectionTargetInformation) {
         return name;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean verify(final InjectionTargetInformation injectionTargetInformation) {
         return injectionTargetInformation.isAnnotationPresent(Named.class)
