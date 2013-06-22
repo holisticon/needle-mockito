@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.holisticon.toolbox</groupId>
-    <artifactId>needle-extended</artifactId>
+    <artifactId>needle-mockito</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -13,8 +13,8 @@
         <version>7</version>
     </parent>
 
-    <description>Please refer to https://github.com/holisticon/needle-extended/.</description>
-    <url>https://github.com/holisticon/needle-extended/</url>
+    <description>Please refer to https://github.com/holisticon/needle-mockito/.</description>
+    <url>https://github.com/holisticon/needle-mockito/</url>
 
     <properties>
         <java.version>1.6</java.version>
@@ -91,14 +91,14 @@
     <inceptionYear>2013</inceptionYear>
 
     <issueManagement>
-        <url>https://github.com/holisticon/needle-extended/issues</url>
+        <url>https://github.com/holisticon/needle-mockito/issues</url>
         <system>GitHub Issues</system>
     </issueManagement>
 
     <scm>
-        <connection>scm:git:https://github.com/holisticon/needle-extended.git</connection>
-        <developerConnection>scm:git:https://github.com/holisticon/needle-extended.git</developerConnection>
-        <url>scm:git:https://github.com/holisticon/needle-extended.git</url>
+        <connection>scm:git:https://github.com/holisticon/needle-mockito.git</connection>
+        <developerConnection>scm:git:https://github.com/holisticon/needle-mockito.git</developerConnection>
+        <url>scm:git:https://github.com/holisticon/needle-mockito.git</url>
         <tag>HEAD</tag>
     </scm>
 
