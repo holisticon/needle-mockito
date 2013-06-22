@@ -13,9 +13,6 @@ import de.akquinet.jbosscc.needle.injection.InjectionProvider;
  */
 public interface InjectionProviderInstancesSupplier {
 
-    /**
-     * Factory to create Supplier from array of providers.
-     */
     public static class Factory {
 
         /**
@@ -25,7 +22,7 @@ public interface InjectionProviderInstancesSupplier {
             // empty
         }
 
-        public static InjectionProviderInstancesSupplier createSupplierFor(final InjectionProvider<?>... providers) {
+        public static Set<InjectionProvider<?>> newProviderSet(final InjectionProvider<?>... providers) {
             final Set<InjectionProvider<?>> result = new LinkedHashSet<InjectionProvider<?>>();
 
             if (providers != null && providers.length > 0) {
@@ -35,8 +32,30 @@ public interface InjectionProviderInstancesSupplier {
                 }
 
             }
+            return result;
+        }
 
-            // create supplier from build set
+        public static InjectionProviderInstancesSupplier createSupplierFor(final InjectionProvider<?>... providers) {
+            return new InjectionProviderInstancesSupplier() {
+
+                @Override
+                public Set<InjectionProvider<?>> get() {
+                    return newProviderSet(providers);
+                }
+            };
+        }
+
+        public static InjectionProviderInstancesSupplier merge(final InjectionProviderInstancesSupplier... suppliers) {
+            final Set<InjectionProvider<?>> result = new LinkedHashSet<InjectionProvider<?>>();
+
+            if (suppliers != null && suppliers.length > 0) {
+
+                for (final InjectionProviderInstancesSupplier supplier : suppliers) {
+                    result.addAll(supplier.get());
+                }
+
+            }
+
             return new InjectionProviderInstancesSupplier() {
 
                 @Override
@@ -44,6 +63,11 @@ public interface InjectionProviderInstancesSupplier {
                     return result;
                 }
             };
+        }
+
+        public static InjectionProvider<?>[] createProvidersFor(final InjectionProviderInstancesSupplier... suppliers) {
+            final InjectionProviderInstancesSupplier supplier = merge(suppliers);
+            return supplier.get().toArray(new InjectionProvider<?>[supplier.get().size()]);
         }
     }
 
