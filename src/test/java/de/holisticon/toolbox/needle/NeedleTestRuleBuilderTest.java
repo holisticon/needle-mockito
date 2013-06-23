@@ -32,8 +32,8 @@ public class NeedleTestRuleBuilderTest {
     };
 
     @Rule
-    public final NeedleTestRule needle = NeedleTestRuleBuilder.needleRule(this)
-            .addProvider(DefaultInstanceInjectionProvider.providerFor(new Foo("default"))).addSupplier(supplier).build();
+    public final NeedleTestRule needle = NeedleTestRuleBuilder.needleTestRule()
+            .addProvider(DefaultInstanceInjectionProvider.providerFor(new Foo("default"))).addSupplier(supplier).testInstance(this).build();
 
     @Inject
     private Bar bar;

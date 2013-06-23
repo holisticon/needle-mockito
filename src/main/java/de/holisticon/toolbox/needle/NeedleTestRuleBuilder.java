@@ -14,7 +14,11 @@ import de.holisticon.toolbox.needle.provider.InjectionProviderInstancesSupplier;
  */
 public class NeedleTestRuleBuilder implements InjectionProviderInstancesSupplier {
 
-    public static NeedleTestRuleBuilder needleRule(final Object testInstance) {
+    public static NeedleTestRuleBuilder needleTestRule() {
+        return new NeedleTestRuleBuilder();
+    }
+
+    public static NeedleTestRuleBuilder needleTestRule(final Object testInstance) {
         return new NeedleTestRuleBuilder(testInstance);
     }
 
@@ -54,7 +58,7 @@ public class NeedleTestRuleBuilder implements InjectionProviderInstancesSupplier
 
     public NeedleTestRule build() {
         if (testInstance == null) {
-            throw new IllegalStateException("testInstance must not be be set!");
+            throw new IllegalStateException("testInstance has not been set!");
         }
         return new NeedleTestRule(testInstance, createProvidersFor(this));
     }
