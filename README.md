@@ -15,7 +15,21 @@ Those extensions are:
 - InjectionProvider factories for concrete instances and @Named instances
 - InjectionProvider Set to configure more than one provider in a class
 - Builder API for fluent and transparent setup of complex rule configuration
-- H2 tools and basic config that are missing in the core framework 
+- H2 tools and basic config that are missing in the core framework
+
+### Usage
+
+needle-mockito is released on [maven-repo[(http://repo1.maven.org/maven2/de/holisticon/toolbox/needle-mockito/), just set your maven dependencies to:
+
+```
+...
+<dependency>
+  <groupId>de.holisticon.toolbox</groupId>
+  <artifactId>needle-mockito</artifactId>
+  <version>1.0</version>
+</dependency>
+...
+```
 
 ## Getting started
 
