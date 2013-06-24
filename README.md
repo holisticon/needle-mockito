@@ -21,12 +21,13 @@ Those extensions are:
 
 needle-mockito is released on [maven-repo](http://repo1.maven.org/maven2/de/holisticon/toolbox/needle-mockito/), just set your maven dependencies to:
 
-```
+```xml
 ...
 <dependency>
   <groupId>de.holisticon.toolbox</groupId>
   <artifactId>needle-mockito</artifactId>
   <version>1.0</version>
+  <scope>test</scope>
 </dependency>
 ...
 ```
