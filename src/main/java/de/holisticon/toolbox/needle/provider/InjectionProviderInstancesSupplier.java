@@ -13,15 +13,23 @@ import de.akquinet.jbosscc.needle.injection.InjectionProvider;
  */
 public interface InjectionProviderInstancesSupplier {
 
+    /**
+     * Factory to transform InjectionProviders to Supplier and vice versa.
+     */
     public static class Factory {
 
         /**
-         * Hide.
+         * Hide constructor for util class.
          */
         private Factory() {
             // empty
         }
 
+        /**
+         * Creates a new Set.
+         * @param providers vararg array of providers
+         * @return set containing providers
+         */
         public static Set<InjectionProvider<?>> newProviderSet(final InjectionProvider<?>... providers) {
             final Set<InjectionProvider<?>> result = new LinkedHashSet<InjectionProvider<?>>();
 
@@ -35,6 +43,11 @@ public interface InjectionProviderInstancesSupplier {
             return result;
         }
 
+        /**
+         * Creates a new Supplier.
+         * @param providers vararg array of providers
+         * @return new supplier
+         */
         public static InjectionProviderInstancesSupplier createSupplierFor(final InjectionProvider<?>... providers) {
             return new InjectionProviderInstancesSupplier() {
 
@@ -45,6 +58,11 @@ public interface InjectionProviderInstancesSupplier {
             };
         }
 
+        /**
+         * Creates new supplier containing all providers in a new set.
+         * @param suppliers vararg array of existing suppliers
+         * @return new instance containing all providers
+         */
         public static InjectionProviderInstancesSupplier merge(final InjectionProviderInstancesSupplier... suppliers) {
             final Set<InjectionProvider<?>> result = new LinkedHashSet<InjectionProvider<?>>();
 
@@ -65,6 +83,11 @@ public interface InjectionProviderInstancesSupplier {
             };
         }
 
+        /**
+         * Create array of providers from given suppliers.
+         * @param suppliers vararg array of suppliers
+         * @return array of providers for use with vararg method
+         */
         public static InjectionProvider<?>[] createProvidersFor(final InjectionProviderInstancesSupplier... suppliers) {
             final InjectionProviderInstancesSupplier supplier = merge(suppliers);
             return supplier.get().toArray(new InjectionProvider<?>[supplier.get().size()]);
