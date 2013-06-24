@@ -15,7 +15,7 @@ Those extensions are:
 - InjectionProvider factories for concrete instances and @Named instances
 - InjectionProvider Set to configure more than one provider in a class
 - Builder API for fluent and transparent setup of complex rule configuration
-- H2 tools and basic config that are missing in the core framework
+- ~~H2 tools and basic config that are missing in the core framework~~
 
 ### Usage
 
