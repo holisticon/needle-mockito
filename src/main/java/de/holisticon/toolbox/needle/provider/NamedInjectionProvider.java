@@ -41,6 +41,12 @@ public class NamedInjectionProvider<T> implements InjectionProvider<T> {
      *        value to return.
      */
     protected NamedInjectionProvider(final String name, final T value) {
+        if (value == null) {
+            throw new IllegalArgumentException("value must not be null!");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("name must not be null!");
+        }
         this.name = name;
         this.value = value;
     }

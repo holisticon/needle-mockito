@@ -31,6 +31,9 @@ public class DefaultInstanceInjectionProvider<T> implements InjectionProvider<T>
      *        instance to return.
      */
     public DefaultInstanceInjectionProvider(final T instance) {
+        if (instance == null) {
+            throw new IllegalArgumentException("instance must not be null!");
+        }
         this.instance = instance;
     }
 
