@@ -10,61 +10,78 @@ import de.holisticon.toolbox.needle.provider.InjectionProviderInstancesSupplier;
 
 /**
  * Builder to create {@link NeedleTestRule} with complex setup.
+ * 
  * @author Jan Galinski, Holisticon AG
  */
-public class NeedleTestRuleBuilder implements InjectionProviderInstancesSupplier {
+public class NeedleTestRuleBuilder implements
+		InjectionProviderInstancesSupplier {
 
-    public static NeedleTestRuleBuilder needleTestRule() {
-        return new NeedleTestRuleBuilder();
-    }
+	public static NeedleTestRuleBuilder needleTestRule() {
+		return new NeedleTestRuleBuilder();
+	}
 
-    public static NeedleTestRuleBuilder needleTestRule(final Object testInstance) {
-        return new NeedleTestRuleBuilder(testInstance);
-    }
+	public static NeedleTestRuleBuilder needleTestRule(final Object testInstance) {
+		return new NeedleTestRuleBuilder(testInstance);
+	}
 
-    private Object testInstance;
-    private final Set<InjectionProvider<?>> internalProviders = new LinkedHashSet<InjectionProvider<?>>();
+	private Object testInstance;
+	private final Set<InjectionProvider<?>> internalProviders = new LinkedHashSet<InjectionProvider<?>>();
 
-    /**
-     * Hide.
-     */
-    private NeedleTestRuleBuilder() {
-    }
+	/**
+	 * Hide.
+	 */
+	private NeedleTestRuleBuilder() {
+	}
 
-    /**
-     * Hide.
-     */
-    private NeedleTestRuleBuilder(final Object testInstance) {
-        testInstance(testInstance);
-    }
+	/**
+	 * Hide.
+	 */
+	private NeedleTestRuleBuilder(final Object testInstance) {
+		testInstance(testInstance);
+	}
 
-    public NeedleTestRuleBuilder testInstance(final Object testInstance) {
-        if (testInstance == null) {
-            throw new IllegalArgumentException("testInstance must not be null");
-        }
-        this.testInstance = testInstance;
-        return this;
-    }
+	public NeedleTestRuleBuilder testInstance(final Object testInstance) {
+		if (testInstance == null) {
+			throw new IllegalArgumentException("testInstance must not be null");
+		}
+		this.testInstance = testInstance;
+		return this;
+	}
 
-    public NeedleTestRuleBuilder addProvider(final InjectionProvider<?>... providers) {
-        internalProviders.addAll(newProviderSet(providers));
-        return this;
-    }
+	public NeedleTestRuleBuilder addProvider(
+			final InjectionProvider<?>... providers) {
+		internalProviders.addAll(newProviderSet(providers));
+		return this;
+	}
 
-    public NeedleTestRuleBuilder addSupplier(final InjectionProviderInstancesSupplier... suppliers) {
-        internalProviders.addAll(merge(suppliers).get());
-        return this;
-    }
+	public NeedleTestRuleBuilder addSupplier(
+			final InjectionProviderInstancesSupplier... suppliers) {
+		internalProviders.addAll(merge(suppliers).get());
+		return this;
+	}
 
-    public NeedleTestRule build() {
-        if (testInstance == null) {
-            throw new IllegalStateException("testInstance has not been set!");
-        }
-        return new NeedleTestRule(testInstance, createProvidersFor(this));
-    }
+	/**
+	 * Scans annotations in the provided instance and looks for injection
+	 * provider and injection provider instances supplier.
+	 * 
+	 * @param instance instance to scan.
+	 * @return builder.
+	 */
+	public NeedleTestRuleBuilder scanAnnotations(final Object instance) {
+		internalProviders
+				.addAll(newProviderSet(annotatedProvidesFromInstance(instance)));
+		return this;
+	}
 
-    @Override
-    public Set<InjectionProvider<?>> get() {
-        return internalProviders;
-    }
+	public NeedleTestRule build() {
+		if (testInstance == null) {
+			throw new IllegalStateException("testInstance has not been set!");
+		}
+		return new NeedleTestRule(testInstance, createProvidersFor(this));
+	}
+
+	@Override
+	public Set<InjectionProvider<?>> get() {
+		return internalProviders;
+	}
 }

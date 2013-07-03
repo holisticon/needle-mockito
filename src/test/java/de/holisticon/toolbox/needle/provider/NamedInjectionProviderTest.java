@@ -21,10 +21,12 @@ public class NamedInjectionProviderTest {
     @Rule
     public final NeedleRule needle = new NeedleRule(providerForNamedValue(HELLO, new Bar(HELLO)), providerForNamedValue(WORLD, new Bar(WORLD)));
 
+    @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
     @Named(HELLO)
     private Bar hello;
 
+    @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
     @Named(WORLD)
     private Bar world;

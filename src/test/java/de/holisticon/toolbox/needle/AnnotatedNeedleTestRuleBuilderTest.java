@@ -19,8 +19,9 @@ import de.holisticon.toolbox.needle.provider.NamedInjectionProvider;
 import de.holisticon.toolbox.needle.test.Bar;
 import de.holisticon.toolbox.needle.test.Foo;
 
-public class NeedleTestRuleBuilderTest {
+public class AnnotatedNeedleTestRuleBuilderTest {
 
+	@NeedleInjectionProvider
     private final InjectionProviderInstancesSupplier supplier = new InjectionProviderInstancesSupplier() {
 
         @Override
@@ -33,7 +34,7 @@ public class NeedleTestRuleBuilderTest {
 
     @Rule
     public final NeedleTestRule needle = NeedleTestRuleBuilder.needleTestRule()
-            .addProvider(DefaultInstanceInjectionProvider.providerFor(new Foo("default"))).addSupplier(supplier).testInstance(this).build();
+            .addProvider(DefaultInstanceInjectionProvider.providerFor(new Foo("default"))).scanAnnotations(this).testInstance(this).build();
 
     @Inject
     private Bar bar;
