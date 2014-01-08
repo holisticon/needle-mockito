@@ -1,5 +1,6 @@
 package de.holisticon.toolbox.needle;
 
+
 import static de.holisticon.toolbox.needle.provider.InjectionProviderInstancesSupplier.Factory.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -57,6 +58,7 @@ public class NeedleTestRuleBuilder implements InjectionProviderInstancesSupplier
     }
 
     public NeedleTestRule build() {
+
         if (testInstance == null) {
             throw new IllegalStateException("testInstance has not been set!");
         }

@@ -1,7 +1,27 @@
+#
+# this is a java project
+#
 language: java
-script: mvn -q clean package
 jdk:
-  - oraclejdk7
+- oraclejdk7
+#
+# checkout the settings.xml before build
+#
+before_install: "git clone https://github.com/holisticon/travis-configuration.git target/travis"
+#
+# build, package and deploy snapshot to sonatype repo
+#
+script: "mvn -q clean deploy --settings target/travis/settings.xml"
+#
+# whitelist: only use master
+#
 branches:
   only:
-    - master
+  - master
+#
+# encrypted credentials for sonatype
+#
+env:
+  global:
+  - secure: UmdkdvbWwa/iY+30ZhVZ67qdF2D95Tl7dnm/CK5J15pIgxdaw6dO+MfyJvB2npIpQsEaW2DbBjfvCOyp2LPZzOBQyxu6qmWVzlAHoOZhhCz/Iwl6S8moIiuuCQ8PNsFsF/EiYgZ3yqbGiiLSqDG8PD72Phh1UTyb67+ntktvIIs=
+  - secure: PLX677yOKs2VjzVIZbc4XloL7VazjWKTRpx107t5uBeDB2TRSPwXEE129o3Bu4wyg1/meuB5wUlsTWvceMEdVbt5cC9KmxBNQtQhNwKMurWMsPBIB82bAz6uPlboC3AYh8GsiJmWaAYk6Fv2esXOJI8VpcIC4swKWPg3EXyitss=

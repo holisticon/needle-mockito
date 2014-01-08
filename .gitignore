@@ -6,3 +6,7 @@ target
 *.iml
 .idea
 pom.xml.releaseBackup
+#
+# exclude symlinks
+#
+travis.yml
